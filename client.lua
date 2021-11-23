@@ -1,3 +1,5 @@
+QBCore = exports['qb-core']:GetCoreObject()
+
 local PlayerData = {}
 local currentwalkingstyle = 'default'
 
@@ -11,47 +13,38 @@ RegisterCommand('walking-style', function()
   OpenWalkMenu()
 end)
 
-function tprint (tbl, indent)
-    if not indent then indent = 0 end
-    for k, v in pairs(tbl) do
-      formatting = string.rep("  ", indent) .. k .. ": "
-      if type(v) == "table" then
-        print(formatting)
-        tprint(v, indent+1)
-      elseif type(v) == 'boolean' then
-        print(formatting .. tostring(v))      
-      else
-        print(formatting .. v)
-      end
-    end
-end
+RegisterCommand('fetch-style', function()
+	TriggerServerEvent('qb-walkstyles:server:walkstyles', 'get')
+end)
 
 function OpenWalkMenu()
+	local MenuOptions = {
+		{
+			header = "QB Walkstyles",
+			isMenuHeader = true
+		},
+	}
 	for k, v in pairs(Config.Styles) do
- 		if k == 1 then
-			TriggerEvent('nh-context:sendMenu', {
-				{
-					id = 0,
-					header = "Close Menu",
-					txt = "",
-					params = {
-						event = "nh-context:closeMenu",
-					}
-				},
-			})
-		end
-		TriggerEvent('nh-context:sendMenu', {
-			{
-				id = k,
-				header = "<h8>"..v.label.."</h>",
-				txt = "Choose",
-				params = {
-					event = "qb-walkstyles:setwalkstyle",
-					args = v.value
-				}
-			},
-		})
+		
+
+		MenuOptions[#MenuOptions+1] = {
+			header = "<h8>"..v.label.."</h>",
+			txt = "Choose",
+			params = {
+				event = "qb-walkstyles:setwalkstyle",
+				args = v.value,
+			}
+		}
 	end
+
+	MenuOptions[#MenuOptions+1] = {
+		header = "⬅ Close Menu",
+		txt = "",
+		params = {
+			event = "qb-menu:closeMenu",
+		}
+	}
+	exports['qb-menu']:openMenu(MenuOptions)
 end
 
 RegisterNetEvent('qb-walkstyles:setwalkstyle')
@@ -76,18 +69,6 @@ function setwalkstyle(anim)
 		ResetPedStrafeClipset(playerped)
 	end
 end
-
-Citizen.CreateThread(function()
-	while true do
-		local playerhp = GetEntityHealth(PlayerPedId())-100
-		if (playerhp > 50) then
-			setwalkstyle(currentwalkingstyle)
-		else
-			setwalkstyle('move_m@injured')
-		end
-		Wait(10000)
-	end
-end)
 
 RegisterNetEvent('qb-walkstyles:client:walkstyles')
 AddEventHandler('qb-walkstyles:client:walkstyles', function(walkstyle)
