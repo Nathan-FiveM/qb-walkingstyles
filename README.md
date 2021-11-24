@@ -6,7 +6,7 @@
 # Edited by Nathan#8860
 
 # Dependancies
-[nh-context] - Authour removed git repo | You can swap this for a new menu
+[qb-menu] - ```https://github.com/qbcore-framework/qb-menu```
 
 # COMMAND
 ```/walking-style``` opens menu to change current walking style
