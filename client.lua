@@ -176,8 +176,7 @@ function OpenWalkMenu()
 	exports['qb-menu']:openMenu(MenuOptions)
 end
 
-RegisterNetEvent('qb-walkstyles:setwalkstyle')
-AddEventHandler('qb-walkstyles:setwalkstyle', function(anim)
+RegisterNetEvent('qb-walkstyles:setwalkstyle', function(anim)
 	currentwalkingstyle = anim
 	setwalkstyle(anim)
 	TriggerServerEvent('qb-walkstyles:server:walkstyles', 'update', anim)
@@ -199,8 +198,7 @@ function setwalkstyle(anim)
 	end
 end
 
-RegisterNetEvent('qb-walkstyles:client:walkstyles')
-AddEventHandler('qb-walkstyles:client:walkstyles', function(walkstyle)
+RegisterNetEvent('qb-walkstyles:client:walkstyles', function(walkstyle)
 	setwalkstyle(walkstyle)
 	currentwalkingstyle = walkstyle
 end)

@@ -1,7 +1,6 @@
 QBCore = exports['qb-core']:GetCoreObject()
 
-RegisterServerEvent('qb-walkstyles:server:walkstyles')
-AddEventHandler('qb-walkstyles:server:walkstyles', function(x, anim)
+RegisterNetEvent('qb-walkstyles:server:walkstyles', function(x, anim)
 	
 	local loadFile = LoadResourceFile(GetCurrentResourceName(), "./walkingstyles.json")  
 	local _source = source
