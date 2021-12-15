@@ -5,6 +5,16 @@
 
 # Edited by Nathan#8860
 
+# Optional qb-spawn | It grabs the last saved walking style | MonkeyWhisper
+
+Add this to **every** elseif type on 
+```RegisterNUICallback('spawnplayer', function(data)```
+
+```TriggerServerEvent('qb-walkstyles:server:walkstyles', 'get')```
+Should look like so
+
+![image](https://user-images.githubusercontent.com/82112471/146123426-ad7ba57c-fe5e-487f-a33f-ee0f844a8602.png)
+
 # Dependancies
 [qb-menu] - ```https://github.com/qbcore-framework/qb-menu```
 
