@@ -14,10 +14,9 @@ RegisterNetEvent('qb-walkstyles:server:walkstyles', function(x, anim)
 	walking = json.decode(loadFile)
 
 	if x == 'get' then
-
 		if walking ~= nil then
 			for k,v in pairs(walking) do
-				if v.identifier == cid and v.digit == xPlayer.digit then
+				if v.identifier == cid then
 					TriggerClientEvent('qb-walkstyles:client:walkstyles', _source, v.anim)
 					found = true
 				end
@@ -31,7 +30,7 @@ RegisterNetEvent('qb-walkstyles:server:walkstyles', function(x, anim)
 
 		if walking ~= nil then
 			for k,v in pairs(walking) do
-				if v.identifier == cid and v.digit == xPlayer.digit then
+				if v.identifier == cid then
 				else
 					table.insert(newwalk, v)
 				end
@@ -39,7 +38,7 @@ RegisterNetEvent('qb-walkstyles:server:walkstyles', function(x, anim)
 		end
 
 		if anim ~= 'default' then 
-			local newstyle = {identifier = cid, digit = xPlayer.digit, anim = anim}
+			local newstyle = {identifier = cid, anim = anim}
 			table.insert(newwalk, newstyle)
 		end
 
